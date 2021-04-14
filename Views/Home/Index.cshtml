@@ -1,0 +1,35 @@
+﻿@model SaludCore.Models.Usuario
+@{
+    ViewData["Title"] = "LOGIN";
+}
+
+<div id="login">
+    <form asp-action="Login">
+        <fieldset>
+            <h3>Ingreso</h3>
+            <ul>
+                <li>
+                    <label asp-for="usuario" class="control-label">Usuario</label>
+                    <input asp-for="usuario" class="form-control" />
+                    <span class="alert-danger" asp-validation-for="usuario"></span>
+                </li>
+                <li>
+                    <label asp-for="clave" class="control-label">Clave</label>
+                    <input asp-for="clave" class="form-control" type="password" />
+                    <span class="alert-danger" asp-validation-for="clave"></span>
+                </li>
+                <li class="btn">
+                    <input type="submit" value="Login" />
+                </li>
+            </ul>
+        </fieldset>
+    </form>
+</div>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+	window.onload = function () {
+		alert('@Html.Raw(ViewBag.Message)');
+	};
+    </script>
+}

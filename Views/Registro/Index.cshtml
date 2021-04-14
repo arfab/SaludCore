@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SaludCore.Models.Registro>
+    @{
+    ViewData["Title"] = "Registro";
+    }
+
+    <h1>Registro</h1>
+
+    <div class="table-responsive">
+        <table class="dataTabla">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Hora</th>
+                    <th>Comida</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>@Html.DisplayFor(model => item.id)</td>
+                    <td>@Html.DisplayFor(model => item.hora)</td>
+                    <td>@Html.DisplayFor(model => item.comida)</td>
+                    <td>@Html.DisplayFor(model => item.descripcion)</td>
+                </tr>
+			}
+            </tbody>
+        </table>
+    </div>
+    @if (ViewBag.Message != null) {
+    <script type="text/javascript">
+	window.onload = function () {
+		alert('@Html.Raw(ViewBag.Message)');
+	};
+    </script>
+}
