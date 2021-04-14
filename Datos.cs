@@ -3,7 +3,8 @@ using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
 using Dapper;
-
+using SaludCore.Models;
+using System;
 
 namespace SaludCore
 {
@@ -33,6 +34,7 @@ namespace SaludCore
 
         public static List<Models.Registro> ObtenerRegistro(int paciente_id, string fecha)
         {
+
             List<Models.Registro> lRegistro = new List<Models.Registro>();
 
             using (IDbConnection con = new SqlConnection(strConnectionString))
@@ -49,6 +51,44 @@ namespace SaludCore
             }
 
             return lRegistro;
+        }
+
+        public static string InsertarRegistro(Registro registro)
+        {
+
+            string ret = "";
+
+
+            try
+            {
+
+
+                using (IDbConnection con = new SqlConnection(strConnectionString))
+                {
+                    if (con.State == ConnectionState.Closed)
+                        con.Open();
+
+               
+
+                    DynamicParameters parameters = new DynamicParameters();
+       
+                    parameters.Add("@paciente_id", 7);
+                    parameters.Add("@fecha", "2017-01-27");
+                    parameters.Add("@hora", "14:30");
+                    parameters.Add("@comida_id", 1);
+                    parameters.Add("@descripcion", registro.descripcion);
+                    int rowAffected = con.Execute("RegistroInsertar", parameters, commandType: CommandType.StoredProcedure);      
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                registro.errorDesc = ex.Message;
+                ret = ex.Message;
+            }
+
+            return ret;
         }
 
 

@@ -1,0 +1,36 @@
+﻿@model SaludCore.Models.Registro
+@{
+    ViewData["Title"] = "Agregar";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Agregar">
+
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label">Descripción</label>
+                <input asp-for="descripcion" class="form-control" />
+                <span class="alert-danger" asp-validation-for="descripcion"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-success btn-sm" />
+            </div>
+
+            <div class="form-group">
+                <a asp-action="Index">Volver</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+	window.onload = function () {
+		alert('@Html.Raw(ViewBag.Message)');
+	};
+    </script>
+}
+

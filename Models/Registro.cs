@@ -7,6 +7,9 @@ namespace SaludCore.Models
 {
     public class Registro
     {
+
+        public string errorDesc = "";
+
         public int id { get; set; }
 
         public int paciente_id { get; set; }
