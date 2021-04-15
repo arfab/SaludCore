@@ -16,6 +16,8 @@ namespace SaludCore.Controllers
       public IActionResult Agregar()
         {
 
+            ViewBag.ListOfComidas = Datos.ObtenerComidas();
+
             return View();
         }
 

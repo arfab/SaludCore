@@ -75,7 +75,7 @@ namespace SaludCore
                     parameters.Add("@paciente_id", 7);
                     parameters.Add("@fecha", "2017-01-27");
                     parameters.Add("@hora", "14:30");
-                    parameters.Add("@comida_id", 1);
+                    parameters.Add("@comida_id", registro.comida_id);
                     parameters.Add("@descripcion", registro.descripcion);
                     int rowAffected = con.Execute("RegistroInsertar", parameters, commandType: CommandType.StoredProcedure);      
 
@@ -91,6 +91,21 @@ namespace SaludCore
             return ret;
         }
 
+
+        public static List<Models.Registro> ObtenerComidas()
+        {
+            List<Models.Registro> lComida = new List<Models.Registro>();
+                
+            using (IDbConnection con = new SqlConnection(strConnectionString))
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+
+                lComida = con.Query<Models.Registro>("ComidaObtenerTodos").ToList();
+            }
+
+            return lComida;
+        }
 
     }
 }

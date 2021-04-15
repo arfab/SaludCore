@@ -8,6 +8,26 @@
         <form asp-action="Agregar">
 
             <div class="form-group">
+
+                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    <label asp-for="fecha" class="control-label">Fecha</label>
+                    <input type="text" asp-for="fecha" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
+                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="comida_id" class="control-lable">Comida</label>
+                <select id="comida_id" asp-for="comida_id" asp-items="@(new SelectList(@ViewBag.ListofComidas,"id", "descripcion"))" class="custom-select">
+                    <option value="">Elija la comida</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="descripcion" class="control-label">Descripción</label>
                 <input asp-for="descripcion" class="form-control" />
                 <span class="alert-danger" asp-validation-for="descripcion"></span>
@@ -25,12 +45,31 @@
     </div>
 </div>
 
+
 @if (ViewBag.Message != null)
 {
     <script type="text/javascript">
-	window.onload = function () {
-		alert('@Html.Raw(ViewBag.Message)');
-	};
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
     </script>
 }
+else
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    locale: 'es'
+                });
+            });
+        };
+    </script>
 
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>
